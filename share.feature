@@ -12,7 +12,7 @@ Feature: share a photo
   Scenario: publish another photo
     Given that I'm logged in
     And that I have already published one photo
-    When I take another photo
+    When I take another amazing photo
     And approve it (obviously)
-    Then I should see the new photo on my photo stream
+    Then I should be able to see the new photo on my photo stream
     And I should be able to see my previous photo on my photo stream

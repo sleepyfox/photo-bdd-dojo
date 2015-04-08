@@ -18,26 +18,20 @@ def step_impl(context):
 def step_impl(context):
     assert(True == context.myCamera.approve())
 
-@then("I should be able to see it on my photo stream")
-def step_impl(context):
-    LATEST = -1
-    photos = context.myCamera.photo_stream() # returns a list of photos
-    assert( True == (context.my_amazing_photo in photos))
-
 @given("that I have already published one photo")
 def step_impl(context):
     context.my_amazing_photo = context.myCamera.take_photo()
 
-@when("I take another photo")
+@when("I take another amazing photo")
 def step_impl(context):
     context.my_other_amazing_photo = context.myCamera.take_photo()
 
-@then("I should see the new photo on my photo stream")
-def step_impl(context):
-    photos = context.myCamera.photo_stream() # returns a list of photos
-    assert( True == (context.my_other_amazing_photo in photos))
-
-@then("I should be able to see my previous photo on my photo stream")
-def step_impl(context):
-    photos = context.myCamera.photo_stream() # returns a list of photos
-    assert( True == (context.my_amazing_photo in photos))
+@then("I should be able to see {thing} on my photo stream")
+def step_impl(context, thing):
+    if thing == "it":
+        photo = context.my_amazing_photo
+    elif thing == "the new photo":
+        photo = context.my_other_amazing_photo
+    else: # == "my previous photo"
+        photo = context.my_amazing_photo
+    assert(True == (photo in context.myCamera.photo_stream()))
