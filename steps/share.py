@@ -28,10 +28,8 @@ def step_impl(context):
 
 @then("I should be able to see {thing} on my photo stream")
 def step_impl(context, thing):
-    if thing == "it":
-        photo = context.my_amazing_photo
-    elif thing == "the new photo":
+    if thing == "the new photo":
         photo = context.my_other_amazing_photo
-    else: # == "my previous photo"
+    else:
         photo = context.my_amazing_photo
     assert(True == (photo in context.myCamera.photo_stream()))
