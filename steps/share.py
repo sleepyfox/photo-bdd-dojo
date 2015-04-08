@@ -1,5 +1,7 @@
 from behave import *
 from unittest import *
+from camera import Camera
+from slikr import Slikr 
 
 @given("that I'm logged in")
 def step_impl(context):
@@ -40,24 +42,3 @@ def step_impl(context):
 def step_impl(context):
     photos = context.myCamera.photo_stream() # returns a list of photos
     assert( True == (1 in photos))
-
-class Camera:
-    def __init__(self):
-        self.counter = 1
-        self.photos = []
-
-    def take_photo(self):
-        self.photos.append(self.counter)
-        last_photo_id = self.counter
-        self.counter += 1
-        return last_photo_id # ID of picture just taken
-
-    def photo_stream(self):
-        return self.photos
-
-    def approve(self):
-        return True
-
-class Slikr:
-    def login(self, user_name):
-        return True
